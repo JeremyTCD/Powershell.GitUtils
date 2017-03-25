@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E0EC787-598A-457A-8540-A8086890D3F8}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
 		License.txt = License.txt
 		ReadMe.md = ReadMe.md
 	EndProjectSection
@@ -15,6 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3F79E941-D9C8-41AE-96E5-8216F1067F52}"
 	ProjectSection(SolutionItems) = preProject
 		tests\GitUtils.tests.ps1 = tests\GitUtils.tests.ps1
+	EndProjectSection
+	ProjectSection(FolderStartupServices) = postProject
+		{82A7F48D-3B50-4B1E-B82E-3ADA8210C358} = {82A7F48D-3B50-4B1E-B82E-3ADA8210C358}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{6D26E309-A713-45FE-AC5C-5B0EC29D009E}"
