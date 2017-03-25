@@ -1,5 +1,7 @@
 function Read-GitTagMessage{
-	param([string] $tag)
+	[CmdletBinding()]
+	[OutputType([String])]
+	param([Parameter(Mandatory=$true)][string] $tag)
 
 	$message = git tag -l --format '%(contents)' $tag
 
@@ -7,12 +9,21 @@ function Read-GitTagMessage{
 }
 
 function Read-AllGitTagMessages{
+	[CmdletBinding()]
+	[OutputType([String])]
+	
 	$messages = git tag -l --format '%(contents)'
 	 
 	return $messages
 }
 
 function Set-ChangelogFromTags{
-    '# Changelog' | Out-File 'Changelog.md'
-	Read-AllGitTagMessages | Out-File 'Changelog.md' -Append 
+	[CmdletBinding()]
+	[OutputType([void])]
+	param([string] $title = 'Changelog',
+		[string] $fileName = 'Changelog')
+
+	$fileName = "$fileName.md"
+	"# $title"  | Out-File $fileName
+	Read-AllGitTagMessages | Out-File $fileName -Append 
 }
