@@ -8,7 +8,7 @@ function Read-GitTagMessage{
 
 function Read-AllGitTagMessages{
 	$messages = git tag -l --format '%(contents)'
-
+	 
 	return $messages
 }
 
