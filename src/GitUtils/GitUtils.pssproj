@@ -32,8 +32,6 @@
     <Compile Include="GitUtils.pre.ps1" />
     <Compile Include="GitUtils.psd1" />
     <Compile Include="GitUtils.psm1" />
-    <Compile Include="GitUtils.tests.ps1" />
-    <Compile Include="Publish.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />
