@@ -4,6 +4,10 @@ function Read-GitTagMessage{
 	param([Parameter(Mandatory=$true)][string] $tag)
 
 	$message = git tag -l --format '%(contents)' $tag
+	# git tag -l returns multiline contents as an array
+	# with an empty string item between each tag
+	$message = $message[0..($message.Length - 2)]
+	$message = $message -join "`n"
 
 	return $message
 }
