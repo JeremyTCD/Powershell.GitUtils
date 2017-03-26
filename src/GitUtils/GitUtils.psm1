@@ -24,6 +24,6 @@ function Set-ChangelogFromTags{
 		[string] $fileName = 'Changelog')
 
 	$fileName = "$fileName.md"
-	"# $title"  | Out-File $fileName
-	Read-AllGitTagMessages | Out-File $fileName -Append 
+	"# $title"  | Out-File $fileName -Encoding utf8
+	Read-AllGitTagMessages | Out-File $fileName -Append -Encoding utf8
 }
