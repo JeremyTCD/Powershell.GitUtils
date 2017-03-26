@@ -20,6 +20,7 @@ deploy_script:
     git config --global user.name $env:build_user
     git checkout master -q
     Set-ChangelogFromTags
+    git add --intent-to-add .
     git diff --quiet
 
     if($lastexitcode -eq 1){
