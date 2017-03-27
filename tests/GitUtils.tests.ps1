@@ -68,6 +68,43 @@ Describe "Read-AllTagMessages" {
 	}
 } 
 
+Describe "Set-ChangelogFromTags" {
+	BeforeAll{
+		cd $TestDrive
+	}
+	AfterAll{
+		cd \
+	}
+
+	It "Generates changelog" {
+		# Arrange
+		# Create tags in random order
+		$tag1 = '0.1.0'
+		$tag2 = '0.2.1'
+		$tag3 = '0.1.1'
+		$tag4 = '1.2.1'
+
+		git init 
+		for($i=1; $i -le 4; $i++)
+		{
+			$tag = Get-Variable -Name "tag$i" -ValueOnly
+			$message = "## {0}`nBody" -f $tag
+
+			'dummy' | Out-File 'dummy.txt' -Append
+			git add .
+			git commit -m 'dummy'
+			git tag -a $tag -m $message --cleanup=whitespace
+		}
+
+		# Act
+		Set-ChangelogFromTags
+
+		# Assert
+		# Tags should be ordered according to semver, latest first
+		[IO.File]::ReadAllText("$(Get-Location)\Changelog.md") | Should Be "# Changelog`n## 1.2.1`nBody`n`n## 0.2.1`nBody`n`n## 0.1.1`nBody`n`n## 0.1.0`nBody`n`r`n"
+	}
+} 
+
 Describe "Move-TagToHead" {
 	BeforeAll{
 		cd $TestDrive
