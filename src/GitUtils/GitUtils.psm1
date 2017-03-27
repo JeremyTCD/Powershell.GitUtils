@@ -29,8 +29,8 @@ function Set-ChangelogFromTags{
 		[string] $fileName = 'Changelog')
 
 	$fileName = "$fileName.md"
-	"# $title"  | Out-File $fileName -Encoding utf8
-	Read-AllTagMessages | Out-File $fileName -Append -Encoding utf8
+	$content = "# $title`n$(Read-AllTagMessages)"
+	[System.IO.File]::WriteAllLines("$(Get-Location)\$fileName", $content)
 }
 
 function Move-TagToHead{
