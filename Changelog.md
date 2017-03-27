@@ -8,7 +8,7 @@
 
 #### Changes
 - [Set-ChangelogFromTags](https://github.com/JeremyTCD/Powershell.GitUtils#set-changelog-from-tags) no longer prefixes output text with
-a byte order mark.
+a byte order mark
 
 ## 0.3.0
 
