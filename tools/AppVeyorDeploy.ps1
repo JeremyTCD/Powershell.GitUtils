@@ -4,6 +4,8 @@ Add-Content "$($env:USERPROFILE)\.git-credentials" "https://$($env:git_key):x-oa
 git config --global user.email $env:build_user_email
 git config --global user.name $env:build_user
 git checkout master -q
+Remove-Module GitUtils
+Import-Module '.\src\GitUtils\GitUtils.psd1'
 Set-ChangelogFromTags
 git add --intent-to-add .
 git diff --quiet
