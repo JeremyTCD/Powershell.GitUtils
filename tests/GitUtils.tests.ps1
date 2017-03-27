@@ -46,14 +46,12 @@ Describe "Read-AllTagMessages" {
 		$tag2 = '0.2.1'
 		$tag3 = '0.1.1'
 		$tag4 = '1.2.1'
-		$expectedResult = ""
 
 		git init 
 		for($i=1; $i -le 4; $i++)
 		{
 			$tag = Get-Variable -Name "tag$i" -ValueOnly
 			$message = "## {0}`nBody" -f $tag
-			$expectedResult += $message
 
 			'dummy' | Out-File 'dummy.txt' -Append
 			git add .
