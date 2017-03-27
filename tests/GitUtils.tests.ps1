@@ -1,15 +1,15 @@
-Split-Path $PSCommandPath | Set-Location
+$location = Get-Location
 Remove-Module GitUtils
-Import-Module ("..\src\GitUtils\" + (Split-Path -Leaf $PSCommandPath).Replace(".tests.ps1", ".psd1"))
+Import-Module (".\src\GitUtils\" + (Split-Path -Leaf $PSCommandPath).Replace(".tests.ps1", ".psd1"))
 
-Invoke-Expression -Command "..\src\GitUtils\GitUtils.pre.ps1"
+Invoke-Expression -Command ".\src\GitUtils\GitUtils.pre.ps1"
 
 Describe "Read-TagMessage" {
 	BeforeAll{
 		cd $TestDrive
 	}
 	AfterAll{
-		cd \
+		cd $location
 	}
 
 	It "Reads tag message" {
@@ -36,7 +36,7 @@ Describe "Read-AllTagMessages" {
 		cd $TestDrive
 	}
 	AfterAll{
-		cd \
+		cd $location
 	}
 
 	It "Reads all tag messages in semver order" {
@@ -73,7 +73,7 @@ Describe "Set-ChangelogFromTags" {
 		cd $TestDrive
 	}
 	AfterAll{
-		cd \
+		cd $location
 	}
 
 	It "Generates changelog" {
