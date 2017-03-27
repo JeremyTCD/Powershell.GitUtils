@@ -103,35 +103,4 @@ Describe "Set-ChangelogFromTags" {
 		# Tags should be ordered according to semver, latest first
 		[IO.File]::ReadAllText("$(Get-Location)\Changelog.md") | Should Be "# Changelog`n## 1.2.1`nBody`n`n## 0.2.1`nBody`n`n## 0.1.1`nBody`n`n## 0.1.0`nBody`n`r`n"
 	}
-} 
-
-Describe "Move-TagToHead" {
-	BeforeAll{
-		cd $TestDrive
-	}
-	AfterAll{
-		cd \
-	}
-
-	It "Moves tag to head" {
-		# Arrange
-		$tag = '0.1.0'
-		$message = "## Title`nBody"
-
-		git init 
-		'dummy' | Out-File 'dummy.txt'
-		git add .
-		git commit -m 'initial commit'
-		git tag -a $tag -m $message --cleanup=whitespace
-		'dummy' | Out-File 'dummy.txt' -Append
-		git add .
-		git commit --amend --no-edit
-
-		# Act
-		Move-TagToHead $tag $false 
-
-		# Assert
-		git describe --abbrev=0 | Should Be $tag
-		Read-TagMessage $tag | Should Be $message
-	}
-} 
+}

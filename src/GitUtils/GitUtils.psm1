@@ -32,22 +32,3 @@ function Set-ChangelogFromTags{
 	$content = "# $title`n$(Read-AllTagMessages)"
 	[System.IO.File]::WriteAllLines("$(Get-Location)\$fileName", $content)
 }
-
-function Move-TagToHead{
-	[CmdletBinding()]
-	[OutputType([void])]
-	param([Parameter(Mandatory=$true)][string] $tag,
-		[bool] $updateRemote = $true,
-		[string] $remote = 'origin')
-
-	$message = Read-TagMessage $tag
-	git tag -d $tag
-	if($updateRemote){
-		git push $remote ":refs/tags/$tag"
-	}
-
-	git tag -a $tag -m $message --cleanup=whitespace
-	if($updateRemote){
-		git push -f $remote $tag
-	}
-}
