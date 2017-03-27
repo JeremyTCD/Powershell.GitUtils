@@ -1,4 +1,9 @@
 # Changelog
+## 0.6.0
+
+#### Changes
+- Added function [Push-ChangelogFromTags](https://github.com/JeremyTCD/Powershell.GitUtils#push-changelog-from-tags)
+
 ## 0.5.0
 
 #### Changes
