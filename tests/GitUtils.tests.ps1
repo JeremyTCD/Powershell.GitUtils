@@ -1,8 +1,8 @@
 $location = Get-Location
 Remove-Module GitUtils
-Import-Module (".\src\GitUtils\" + (Split-Path -Leaf $PSCommandPath).Replace(".tests.ps1", ".psd1"))
-
-Invoke-Expression -Command ".\src\GitUtils\GitUtils.pre.ps1"
+$module = "$(Join-Path $PSCommandPath '..\..\src\GitUtils\')" + (Split-Path -Leaf $PSCommandPath).Replace(".tests.ps1", ".psd1");
+Import-Module ($module)
+Invoke-Expression -Command "`"$(Join-Path $PSCommandPath '..\..\src\GitUtils\GitUtils.pre.ps1')`""
 
 Describe "Read-TagMessage" {
 	BeforeAll{
