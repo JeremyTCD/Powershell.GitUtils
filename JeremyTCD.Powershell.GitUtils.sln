@@ -25,8 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3F79E941
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{58CFE34C-FD00-4B2C-9693-587249BD1BBB}"
 	ProjectSection(SolutionItems) = preProject
-		tools\Deploy.ps1 = tools\Deploy.ps1
-		tools\Test.ps1 = tools\Test.ps1
+		tools\AppVeyorDeploy.ps1 = tools\AppVeyorDeploy.ps1
+		tools\AppVeyorTest.ps1 = tools\AppVeyorTest.ps1
 	EndProjectSection
 EndProject
 Global
