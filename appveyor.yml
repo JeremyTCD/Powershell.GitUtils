@@ -40,8 +40,9 @@ deploy_script:
         }
     }
    
-    $moduleExists = Find-Module -Name GitUtils -RequiredVersion $env:APPVEYOR_REPO_TAG_NAME
+    $latestVersion = git describe --abbrev=0
+    $moduleExists = Find-Module -Name GitUtils -RequiredVersion $latestVersion
     if(!$moduleExists){
-        Update-ModuleManifest -Path './src/GitUtils/GitUtils.psd1' -ModuleVersion ${env:APPVEYOR_REPO_TAG_NAME}
+        Update-ModuleManifest -Path './src/GitUtils/GitUtils.psd1' -ModuleVersion $latestVersion
         Publish-Module -Path './src/GitUtils' -NuGetApiKey ${env:nuget_key}
     }
