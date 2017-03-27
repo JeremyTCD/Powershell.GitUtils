@@ -1,4 +1,4 @@
-function Read-GitTagMessage{
+function Read-TagMessage{
 	[CmdletBinding()]
 	[OutputType([String])]
 	param([Parameter(Mandatory=$true)][string] $tag)
@@ -12,7 +12,7 @@ function Read-GitTagMessage{
 	return $message
 }
 
-function Read-AllGitTagMessages{
+function Read-AllTagMessages{
 	[CmdletBinding()]
 	[OutputType([String])]
 	
@@ -30,7 +30,7 @@ function Set-ChangelogFromTags{
 
 	$fileName = "$fileName.md"
 	"# $title"  | Out-File $fileName -Encoding utf8
-	Read-AllGitTagMessages | Out-File $fileName -Append -Encoding utf8
+	Read-AllTagMessages | Out-File $fileName -Append -Encoding utf8
 }
 
 function Move-TagToHead{
@@ -40,7 +40,7 @@ function Move-TagToHead{
 		[bool] $updateRemote = $true,
 		[string] $remote = 'origin')
 
-	$message = Read-GitTagMessage $tag
+	$message = Read-TagMessage $tag
 	git tag -d $tag
 	if($updateRemote){
 		git push $remote ":refs/tags/$tag"
