@@ -16,8 +16,9 @@ function Read-AllGitTagMessages{
 	[CmdletBinding()]
 	[OutputType([String])]
 	
-	$messages = git tag -l --format '%(contents)'
-	 
+	$messages = git tag --sort=-v:refname --format '%(contents)'
+	$messages = $messages -join "`n"
+
 	return $messages
 }
 
