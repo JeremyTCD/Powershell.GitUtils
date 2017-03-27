@@ -7,8 +7,6 @@ environment:
     secure: FOSfqqdiN4fPSFkcnR0mv5js+cq/MF+UGsoZV9FeKlJz3I7TDBQ0NxQSoAVcL2Pt
   git_key:
     secure: PxyfPAKDmw/E1ZbhsvQn53bu62I2wNJcegHokyaORVtq3CZuTpWGoOTpNn0U3JJY
-install:
-- ps: Import-Module '.\src\GitUtils\GitUtils.psd1'
 build: off
 test_script: 
 - ps: . '.\tools\AppVeyorTest.ps1'
