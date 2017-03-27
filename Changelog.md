@@ -1,4 +1,9 @@
 # Changelog
+## 0.5.0
+
+#### Changes
+- Removed function Move-TagToHead
+
 ## 0.4.0
 
 #### Changes
