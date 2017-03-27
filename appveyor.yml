@@ -12,6 +12,15 @@ install:
 - ps: |
     Import-Module './src/GitUtils/GitUtils.psd1'
 build: off
+test_script: 
+- ps: |
+    $testResultsFile = ".\TestsResults.xml"
+    $res = Invoke-Pester -OutputFormat NUnitXml -OutputFile $testResultsFile -PassThru
+    (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $testResultsFile))
+    if ($res.FailedCount -gt 0) { 
+        throw "$($res.FailedCount) tests failed."
+    }
+    Remove-Item $testResultsFile
 deploy_script:
 - ps: |
     git config --global credential.helper store
@@ -27,12 +36,13 @@ deploy_script:
         git add .
         git commit -m 'Updated changelog' -q
         git push origin master -q
-    }
-
-    if($lastexitcode -eq 0){
-        $moduleExists = Find-Module -Name GitUtils -RequiredVersion $env:APPVEYOR_REPO_TAG_NAME
-        if(!$moduleExists){
-            Update-ModuleManifest -Path './src/GitUtils/GitUtils.psd1' -ModuleVersion ${env:APPVEYOR_REPO_TAG_NAME}
-            Publish-Module -Path './src/GitUtils' -NuGetApiKey ${env:nuget_key}
+        if($lastexitcode -ne 0){
+            Write-Error 'Changelog update failed'
         }
+    }
+   
+    $moduleExists = Find-Module -Name GitUtils -RequiredVersion $env:APPVEYOR_REPO_TAG_NAME
+    if(!$moduleExists){
+        Update-ModuleManifest -Path './src/GitUtils/GitUtils.psd1' -ModuleVersion ${env:APPVEYOR_REPO_TAG_NAME}
+        Publish-Module -Path './src/GitUtils' -NuGetApiKey ${env:nuget_key}
     }
