@@ -23,7 +23,7 @@ a byte order mark.
 #### Fixes
 - Fixed [Read-GitTagMessage](https://github.com/JeremyTCD/Powershell.GitUtils#read-git-tag-message) not handling multiline messages properly
 
-∩╗┐## 0.1.0
+## 0.1.0
 
 Initial release
 
