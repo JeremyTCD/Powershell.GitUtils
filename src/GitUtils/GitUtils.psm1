@@ -37,3 +37,36 @@ function Set-ChangelogFromTags{
 	$content = "# $title`n$(Read-AllTagMessages)"
 	[System.IO.File]::WriteAllLines("$(Get-Location)\$fileName", $content)
 }
+
+function Push-ChangelogFromTags{
+	[CmdletBinding()]
+	[OutputType([void])]
+	param([string] $remote = 'origin',
+		[string] $branch = 'master',
+		[string] $fileName = 'Changelog',
+		[string] $commitMessage = 'Updated changelog')
+
+	Invoke-Git add --intent-to-add .
+	Invoke-Git diff --quiet
+	if($lastexitcode -eq 1){
+		throw 'Stash or commit working directory changes'
+	}
+
+	Invoke-Git checkout $branch -q
+	Set-ChangelogFromTags
+	Invoke-Git add --intent-to-add .
+	Invoke-Git diff --quiet
+
+	if($lastexitcode -eq 1){
+		Invoke-Git add .
+		Invoke-Git commit -m $commitMessage -q
+		Invoke-Git push $remote $branch -q
+		if($lastexitcode -ne 0){
+			Write-Error 'Unable to push new changelog to remote'
+		}else{
+			Write-Verbose 'New changelog pushed to remote'
+		}
+	}else{
+		Write-Verbose 'Changelog unchanged'
+	}
+}

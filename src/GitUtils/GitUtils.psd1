@@ -69,8 +69,7 @@ ScriptsToProcess = 'GitUtils.pre.ps1'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Read-AllTagMessages', 'Set-ChangelogFromTags', 
-               'Read-TagMessage'
+FunctionsToExport = 'Read-AllTagMessages', 'Set-ChangelogFromTags', 'Read-TagMessage', 'Push-ChangelogFromTags'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
@@ -96,7 +95,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('powershell', 'git', 'annotated', 'tag', 'message', 'changelog', 'utils')
+        Tags = 'powershell','git','annotated','tag','message','changelog','utils'
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/JeremyTCD/Powershell.GitUtils/blob/master/License.txt'
