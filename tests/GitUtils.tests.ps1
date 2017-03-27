@@ -8,6 +8,9 @@ Describe "Read-TagMessage" {
 	BeforeAll{
 		cd $TestDrive
 	}
+	AfterAll{
+		cd \
+	}
 
 	It "Reads tag message" {
 		# Arrange
@@ -25,14 +28,15 @@ Describe "Read-TagMessage" {
 
 		# Assert
 		$result | Should Be $message
-
-		cd '/'
 	}
 } 
 
 Describe "Read-AllTagMessages" {
 	BeforeAll{
 		cd $TestDrive
+	}
+	AfterAll{
+		cd \
 	}
 
 	It "Reads all tag messages in semver order" {
@@ -69,6 +73,9 @@ Describe "Read-AllTagMessages" {
 Describe "Move-TagToHead" {
 	BeforeAll{
 		cd $TestDrive
+	}
+	AfterAll{
+		cd \
 	}
 
 	It "Moves tag to head" {
